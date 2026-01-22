@@ -1,0 +1,33 @@
+export const createOrder = async (products: number[], token: string) => {
+    try {
+        const response = await fetch('http://localhost:3001/orders', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                Authorization: token,
+            },
+            body: JSON.stringify({ products }),
+        });
+        const orders = await response.json();
+        return orders;
+    } catch (error) {
+        throw new Error(error as string);
+    }
+};
+
+export const getAllOrders = async (token: string) => {
+    try {
+        const res = await fetch('http://localhost:3001/users/orders', {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json',
+                Authorization: token,
+            },
+
+        });
+        const orders = await res.json();
+        return orders;
+    } catch (error) {
+        throw new Error(error as string);
+    }
+}
